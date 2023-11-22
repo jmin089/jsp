@@ -14,7 +14,9 @@
 		   font-size: 16px; }
 		   th{width:200px; height:40px; }
 		   td{width:400px; }
-		   button{width:200px; height:60px; margin-top:30px; }
+		   button{width:200px; height:60px; margin-top:30px;}
+		   td *{vertical-align: middle;}
+		   #idCheck{width:100px; height: 20px; margin-top:0;}
 		</style>
 		<script>
 		   $(function(){
