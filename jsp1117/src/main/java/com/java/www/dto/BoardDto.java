@@ -3,6 +3,7 @@ package com.java.www.dto;
 import java.sql.Timestamp;
 
 public class BoardDto {
+	
 	public BoardDto() {}
 	public BoardDto(String btitle, String bcontent, String id, String bfile) {
 		this.btitle = btitle;
@@ -15,6 +16,15 @@ public class BoardDto {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.id = id;
+		this.bfile = bfile;
+	}
+	public BoardDto(String btitle, String bcontent, String id, int bgroup, int bstep, int bindent, String bfile) {
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.id = id;
+		this.bgroup = bgroup;
+		this.bstep = bstep;
+		this.bindent = bindent;
 		this.bfile = bfile;
 	}
 	public BoardDto(int bno, String btitle, String bcontent, Timestamp bdate, String id, int bgroup, int bstep,
@@ -30,6 +40,7 @@ public class BoardDto {
 		this.bhit = bhit;
 		this.bfile = bfile;
 	}
+	
 	private int bno;
 	private String btitle;
 	private String bcontent;
@@ -101,5 +112,4 @@ public class BoardDto {
 	public void setBfile(String bfile) {
 		this.bfile = bfile;
 	}
-
 }

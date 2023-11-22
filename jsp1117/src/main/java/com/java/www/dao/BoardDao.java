@@ -39,7 +39,6 @@ public class BoardDao {
 	public ArrayList<BoardDto> bList(String bcategory, String bsearch, int startRow, int endRow) {
 		try {
 			conn = getConnection();
-			//------
 			if(bcategory == null) {
 				query = "select * from ( select row_number() over(order by bgroup desc,bstep asc) rnum, a.* from board a ) where rnum between ? and ?";
 				pstmt = conn.prepareStatement(query);
@@ -65,10 +64,7 @@ public class BoardDao {
 				pstmt.setString(1, bsearch);
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, endRow);
-				
 			}
-			
-			//-----
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				bno = rs.getInt("bno");
@@ -86,8 +82,7 @@ public class BoardDao {
 			//확인용
 			System.out.println("BoardDao bList bno : "+list.get(0).getBno());
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	e.printStackTrace();
 		}finally {
 			try {
 				if(rs!=null) rs.close();
@@ -121,8 +116,7 @@ public class BoardDao {
 				bfile = rs.getString("bfile");
 				bdto = new BoardDto(bno, btitle, bcontent, bdate, id, bgroup, bstep, bindent, bhit, bfile);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	e.printStackTrace();
 		}finally {
 			try {
 				if(rs!=null) rs.close();
@@ -145,8 +139,7 @@ public class BoardDao {
 			pstmt.setString(3, bdto2.getId());
 			pstmt.setString(4, bdto2.getBfile());
 			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	e.printStackTrace();
 		}finally {
 			try {
 				if(rs!=null) rs.close();
@@ -169,16 +162,14 @@ public class BoardDao {
 			pstmt.setString(3, bdto2.getBfile());
 			pstmt.setInt(4, bdto2.getBno());
 			result = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	e.printStackTrace();
 		}finally {
 			try {
 				if(rs!=null) rs.close();
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (Exception e2) { e2.printStackTrace();}
-		}//
+		}
 		return result;
 	}
 
@@ -190,16 +181,14 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bno2);
 			result = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	e.printStackTrace();
 		}finally {
 			try {
 				if(rs!=null) rs.close();
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (Exception e2) { e2.printStackTrace();}
-		}//
+		}
 		return result;
 	}//bDelete
 
@@ -207,7 +196,6 @@ public class BoardDao {
 	public int listCount(String bcategory, String bsearch) {
 		try {
 			conn = getConnection();
-			
 			//list
 			if(bcategory==null) {
 				query = "select count(*) listCount from board";
@@ -231,16 +219,14 @@ public class BoardDao {
 				listCount = rs.getInt("listCount");
 				System.out.println(" listCount 수 : "+listCount);
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	e.printStackTrace();
 		}finally {
 			try {
 				if(rs!=null) rs.close();
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (Exception e2) { e2.printStackTrace();}
-		}//
+		}
 		return listCount;
 	}//listCount
 
@@ -252,21 +238,60 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bno2);
 			result = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	e.printStackTrace();
 		}finally {
 			try {
 				if(rs!=null) rs.close();
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (Exception e2) { e2.printStackTrace();}
-		}//
-		
+		}
 	}//bHitUp
-	
-	
-	
-	
+
+	//답글달기 - insert
+	public int bReply(BoardDto bdto2) {
+		try {
+			System.out.println("bReply result : "+bdto2.getBgroup());
+			conn = getConnection();
+			query = "insert into board values(board_seq.nextval,?,?,sysdate,?,?,?,?,1,?)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bdto2.getBtitle());
+			pstmt.setString(2, bdto2.getBcontent());
+			pstmt.setString(3, bdto2.getId());
+			pstmt.setInt(4, bdto2.getBgroup());    //부모의 bgroup번호
+			pstmt.setInt(5, bdto2.getBstep()+1);   //부모의 bstep+1
+			pstmt.setInt(6, bdto2.getBindent()+1); //부모의 bindent+1
+			pstmt.setString(7, bdto2.getBfile());
+			result = pstmt.executeUpdate();
+			System.out.println("bReply dao result : "+result);
+		} catch (Exception e) {	e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}
+		return result;
+	}//bReply
+
+	//bstep 1증가 - update
+	public void bstepUp(int bgroup2, int bstep2) {
+		try {
+			conn = getConnection();
+			query = "update board set bstep = bstep+1 where bgroup = ? and bstep>?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bgroup2);
+			pstmt.setInt(2, bstep2);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}
+	}//bstepUp
 	
 }//class

@@ -31,7 +31,6 @@
 		</script>
 	</head>
 	<body>
-	  
 	  <div>
 	   <h1>게시글 보기</h1>
 		   <table>
@@ -62,19 +61,19 @@
 		     <tr>
 		       <th>이미지</th>
 		       <td>
-		         <c:if test="${bdto.bfile !=null }">
+		         <c:if test="${bdto.bfile != null}">
 		           <img src="upload/${bdto.bfile}">
 		         </c:if>
-		         <c:if test="${bdto.bfile ==null }">
+		         <c:if test="${bdto.bfile == null}">
 		           <i class="fa fa-ban" aria-hidden="true"></i> 첨부파일 없음
 		         </c:if>
 		       </td>
 		     </tr>
 		   </table>
+		   <a href="bReply.do?bno=${bdto.bno}"><button type="button" id="rbtn">답글달기</button></a>
 		   <a href="bUpdate.do?bno=${bdto.bno}"><button type="button" id="fbtn">게시글수정</button></a>
 		   <button type="button" id="delBtn">게시글삭제</button>
 		   <a href="bList.do"><button type="button">게시글리스트</button></a>
 	  </div>
-	
 	</body>
 </html>

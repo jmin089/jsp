@@ -29,7 +29,6 @@
 				 alert("회원정보를 저장합니다.");  
 				 m_frm.submit();
 			  });//fbtn
-			  
 			  $("#idCheck").click(function(){
 				 alert($("#id").val()); 
 				 var chId = $("#id").val();
@@ -105,6 +104,5 @@
 		   <button type="button" onclick="javascript:history.back()">취소</button>
 	   </form>
 	  </div>
-	
 	</body>
 </html>

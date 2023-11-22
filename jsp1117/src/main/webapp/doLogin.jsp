@@ -20,7 +20,5 @@
 	         location.href="login.do";
 	      </script>
 	   </c:if>
-	  
-	
 	</body>
 </html>

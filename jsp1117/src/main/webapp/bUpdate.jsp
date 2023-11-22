@@ -26,7 +26,6 @@
 		    		//alert($("#btitle").val());
 		    		alert("파일을 첨부합니다.");
 		    		b_frm.submit();
-		    		
 		    	});
 		    });
 		</script>
@@ -63,12 +62,10 @@
 		       <th>이미지</th>
 		       <td>${bdto.bfile} <img src="upload/${bdto.bfile}"></td>
 		     </tr>
-		     
 		   </table>
 		   <button type="button" id="fbtn">저장</button>
 		   <button type="button" onclick="javascript:history.back()">취소</button>
 	   </form>
 	  </div>
-	
 	</body>
 </html>

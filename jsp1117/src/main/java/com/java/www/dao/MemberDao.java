@@ -55,7 +55,6 @@ public class MemberDao {
 		return mdto;
 	}//mDoLogin
 	
-	
 	//커넥션풀에서 Connection객체 가져오기
 	public Connection getConnection() {
 		Connection connection = null;
@@ -66,7 +65,5 @@ public class MemberDao {
 		} catch (Exception e) { e.printStackTrace();}
 		return connection;
 	}//getConnection
-
-	
 	
 }//class

@@ -11,6 +11,7 @@ public class MDoLoginService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		System.out.println("Service id : "+id);
@@ -27,9 +28,7 @@ public class MDoLoginService implements Service {
 			session.setAttribute("session_id", mdto.getId());
 			session.setAttribute("session_name", mdto.getName());
 		}
-		
 		//request객체에 담기
 		request.setAttribute("result", result);
-
 	}
 }//

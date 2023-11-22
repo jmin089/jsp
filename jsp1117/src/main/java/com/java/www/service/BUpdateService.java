@@ -15,7 +15,6 @@ public class BUpdateService implements Service {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		
 		//객체선언
 		BoardDao bdao = new BoardDao();
 		
@@ -58,5 +57,4 @@ public class BUpdateService implements Service {
 			
 		} catch (Exception e) { e.printStackTrace();}
 	}
-
 }

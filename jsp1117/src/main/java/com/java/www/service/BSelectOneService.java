@@ -10,6 +10,7 @@ public class BSelectOneService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		//dao접근
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		BoardDao bdao = new BoardDao();
@@ -20,8 +21,6 @@ public class BSelectOneService implements Service {
 		
 		//request 추가
 		request.setAttribute("bdto", bdto);
-		
-
 	}
 
 }

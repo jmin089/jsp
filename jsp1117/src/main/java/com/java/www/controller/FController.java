@@ -14,8 +14,10 @@ import com.java.www.service.Service;
 import com.java.www.service.BDeleteService;
 import com.java.www.service.BInsertService;
 import com.java.www.service.BListService;
+import com.java.www.service.BReplyService;
 import com.java.www.service.BSelectOneService;
 import com.java.www.service.BUpdateService;
+import com.java.www.service.DoBReplyService;
 
 @WebServlet("*.do")
 public class FController extends HttpServlet {
@@ -35,20 +37,25 @@ public class FController extends HttpServlet {
 		case "/index.do":
 			response.sendRedirect("index.jsp");
 			break;
+			
 		case "/mInsert.do":
 			response.sendRedirect("mInsert.jsp");
 			break;
+			
 		case "/login.do":
 			response.sendRedirect("login.jsp");
 			break;
+			
 		case "/doLogin.do":
 			service = new MDoLoginService();
 			service.execute(request, response);
 			url = "doLogin.jsp";
 			break;
+			
 		case "/logout.do":
 			response.sendRedirect("logout.jsp");
 			break;
+			
 		case "/bList.do":  //1. 게시글 전체가져오기
 			service = new BListService();
 			service.execute(request, response);
@@ -56,6 +63,7 @@ public class FController extends HttpServlet {
 			System.out.println("FController : bList.jsp호출");
 			url = "bList.jsp";
 			break;
+			
 		case "/bView.do":  //2. 게시글 1개 가져오기
 			service = new BSelectOneService();
 			service.execute(request, response);
@@ -63,9 +71,11 @@ public class FController extends HttpServlet {
 			System.out.println("FController : bView.jsp호출");
 			url = "bView.jsp";
 			break;
+			
 		case "/bInsert.do":  //3. 게시글 쓰기화면 
 			response.sendRedirect("bInsert.jsp");
 			break;
+			
 		case "/doBInsert.do":  //3. 게시글 쓰기 - insert
 			service = new BInsertService();
 			service.execute(request, response);
@@ -73,6 +83,7 @@ public class FController extends HttpServlet {
 			System.out.println("FController : bInsert.jsp호출");
 			url = "doBInsert.jsp";
 			break;
+			
 		case "/bUpdate.do":  //4. 게시글 수정화면 - select
 			service = new BSelectOneService();
 			service.execute(request, response);
@@ -80,6 +91,7 @@ public class FController extends HttpServlet {
 			System.out.println("FController : bUpdate.jsp호출");
 			url = "bUpdate.jsp";
 			break;
+			
 		case "/doBUpdate.do":  //4. 게시글 수정 - update
 			service = new BUpdateService();
 			service.execute(request, response);
@@ -87,6 +99,7 @@ public class FController extends HttpServlet {
 			System.out.println("FController : doBUpdate.jsp호출");
 			url = "doBUpdate.jsp";
 			break;
+			
 		case "/bDelete.do":  //5. 게시글 삭제 - delete
 			service = new BDeleteService();
 			service.execute(request, response);
@@ -95,8 +108,24 @@ public class FController extends HttpServlet {
 			System.out.println("FController : bDelete.jsp호출");
 			url = "bDelete.jsp";
 			break;
-		
-		
+			
+		case "/bReply.do":  //6. 답글달기 - select
+			service = new BReplyService();
+			service.execute(request, response);
+			//확인용
+			System.out.println("bno : "+request.getParameter("bno"));
+			System.out.println("FController : bReply.jsp호출");
+			url = "bReply.jsp";
+			break;
+			
+		case "/doBReply.do":  //6. 답글달기저장 - insert
+			service = new DoBReplyService();
+			service.execute(request, response);
+			//확인용
+			System.out.println("bno : "+request.getParameter("bno"));
+			System.out.println("FController : doBReply.jsp호출");
+			url = "doBReply.jsp";
+			break;
 		}//switch
 		
 		//url이 있을때만, dispatcher 사용
@@ -104,11 +133,9 @@ public class FController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response); //
 		}
-		
-		
-	}//
+	}
 	
-	//-------------------------
+	//----------------------------------------------------------------------------------------------------
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet");
@@ -118,5 +145,4 @@ public class FController extends HttpServlet {
 		System.out.println("doPost");
 		doAction(request, response);
 	}
-
 }

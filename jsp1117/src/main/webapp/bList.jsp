@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    
 		<meta charset="UTF-8">
 		<title>게시판</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -63,11 +62,9 @@
 		        <div class="title">
 		          <input type="text" size="16" name="bsearch" id="bsearch">
 		        </div>
-		  
 		        <button type="button" id="sbtn" ><i class="fas fa-search"></i></button>
 		      </form>
 		    </div>
-		   
 		   <table>
 		     <colgroup>
 		       <col width="12%">
@@ -89,13 +86,17 @@
 		     <c:forEach items="${list}" var="bdto">
 			     <tr>
 			       <td>${bdto.bno}</td>
-			       <td><a href="bView.do?bno=${bdto.bno}">${bdto.btitle}</a></td>
+			       <td>
+				       <a href="bView.do?bno=${bdto.bno}">
+				       <c:forEach var="s" begin="1" end="${bdto.bindent}" step="1">▶</c:forEach>
+				       ${bdto.btitle}
+				       </a>
+			       </td>
 			       <td>${bdto.id}</td>
 			       <td><fmt:formatDate value="${bdto.bdate}" pattern="yyyy-MM-dd"/></td>
 			       <td>${bdto.bhit}</td>
 			     </tr>
 		     </c:forEach>
-		     
 		   </table>
 		    <div id="n">
 		      <c:if test="${page>1 }">
@@ -104,7 +105,6 @@
 		      <c:if test="${page==1 }">
 		        <span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
 		      </c:if>
-		      
 		      <c:if test="${page>1 }">
 		        <a href="bList.do?page=${page-1}&bcategory=${bcategory}&bsearch=${bsearch}"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span></a>
 		      </c:if>
@@ -135,6 +135,5 @@
 		   <a href="bInsert.do"><button type="button">글쓰기</button></a>
 		   <a href="index.do"><button type="button">홈으로</button></a>
 		</div>
-	
 	</body>
 </html>

@@ -23,6 +23,5 @@
 		    <li><a href="memUpdate.do">회원정보수정</a></li>
 		  </ul>
 	  </c:if>
-	
 	</body>
 </html>

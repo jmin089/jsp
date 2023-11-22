@@ -4,13 +4,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>logout</title>
+		<title>답글달기 - doBReply</title>
 	</head>
 	<body>
-	  <% session.invalidate(); %>
-	  <script>
-	    alert("로그아웃 되었습니다.");
-	    location.href="index.do";
-	  </script>
+		<script>
+			alert("답글이 저장되었습니다.");
+			location.href = "bList.do";
+		</script>
 	</body>
 </html>

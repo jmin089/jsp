@@ -29,7 +29,6 @@ public class BListService implements Service {
 		String bcategory = request.getParameter("bcategory");
 		String bsearch = request.getParameter("bsearch");
 		
-		
 		//--> numbering메소드 호출
 		Map<String, Object> map = numbering(page,bcategory,bsearch);
 		int listCount = (int)map.get("listCount");
@@ -58,12 +57,11 @@ public class BListService implements Service {
 
 	}//execute
 	
-	
 	//메소드 : 리턴타입 메소드명(매개변수){ }
 	public Map<String, Object> numbering(int page, String bcategory, String bsearch){
 		Map<String, Object> map = new HashMap();
 		
-		//-----
+		//--------------------------------------------------------------------------------------------------------------
 		int rowPage = 10; //1페이지당 10개의 게시글표시
 		int bottomPage = 10; //하단넘버링 개수
 		
@@ -89,15 +87,8 @@ public class BListService implements Service {
 		map.put("endPage", endPage);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
-		//-----
+		//--------------------------------------------------------------------------------------------------------------
 		
 		return map;
 	}//numbering
-	
-	
-	
-	
-	
-	
-
 }//class

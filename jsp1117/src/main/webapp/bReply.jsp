@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>글쓰기</title>
+		<title>답글달기</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<style>
 		   *{margin:0; padding:0;}
@@ -30,17 +30,20 @@
 	</head>
 	<body>
 	  <div>
-	   <h1>글쓰기</h1>
-	   <form name="b_frm" method="post" action="doBInsert.do" enctype="multipart/form-data">
+	   <h1>답글달기</h1>
+	   <form name="b_frm" method="post" action="doBReply.do" enctype="multipart/form-data">
 		   <table>
 		     <input type="hidden" name="id" value="${session_id}">
+		     <input type="hidden" name="bgroup" value="${bdto.bgroup}">   <!-- 그룹 -->
+		     <input type="hidden" name="bstep" value="${bdto.bstep}">   <!-- 순서 -->
+		     <input type="hidden" name="bindent" value="${bdto.bindent}">   <!-- 들여쓰기 -->
 		     <colgroup>
 		       <col width="20%">
 		       <col width="80%">
 		     </colgroup>
 		     <tr>
 		       <th>제목</th>
-		       <td><input type="text" name="btitle" id="btitle"></td>
+		       <td><input type="text" name="btitle" id="btitle" value="[답글] ${bdto.btitle}"></td>
 		     </tr>
 		     <tr>
 		       <th>아이디</th>
@@ -48,7 +51,14 @@
 		     </tr>
 		     <tr>
 		       <th>내용</th>
-		       <td><textarea name="bcontent" rows="30" cols="65"></textarea></td>
+		       <td>
+		       <textarea name="bcontent" rows="30" cols="65">
+  
+[답글]
+------------------------------------------------------------------
+${bdto.bcontent}
+		       </textarea>
+		       </td>
 		     </tr>
 		     <tr>
 		       <th>파일첨부1</th>

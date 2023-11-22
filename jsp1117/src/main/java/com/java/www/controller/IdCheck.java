@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-
 @WebServlet("/IdCheck")
 public class IdCheck extends HttpServlet {
 	
@@ -24,8 +23,7 @@ public class IdCheck extends HttpServlet {
 		//response.getWriter().print(jArray);
 		response.getWriter().print(jObject);
 	}
-	//-------------------------
-	
+	//-----------------------------------------------------------------------------------------------------------------------------
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet");
 		doAction(request, response);
@@ -34,6 +32,5 @@ public class IdCheck extends HttpServlet {
 		System.out.println("doPost");
 		doAction(request, response);
 	}
-
 }
 

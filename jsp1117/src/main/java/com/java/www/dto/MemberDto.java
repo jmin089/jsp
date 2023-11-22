@@ -22,6 +22,7 @@ public class MemberDto {
 		this.hobby = hobby;
 		this.mdate = mdate;
 	}
+	
 	private String id;
 	private String pw;
 	private String name;
@@ -72,9 +73,4 @@ public class MemberDto {
 	public void setMdate(Timestamp mdate) {
 		this.mdate = mdate;
 	}
-	
-	
-	
-	
-
 }

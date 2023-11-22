@@ -23,8 +23,6 @@
 				 l_frm.submit();
 			  });
 		  });
-		   
-		   
 		</script>
 	</head>
 	<body>
@@ -45,6 +43,5 @@
 		   <a href="index.do"><button type="button">홈으로</button></a>
 	   </form>
 	   </div>
-	
 	</body>
 </html>

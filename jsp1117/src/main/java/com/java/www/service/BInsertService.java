@@ -15,7 +15,8 @@ public class BInsertService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		//dao접근
+		
+		//Dao 접근
 		BoardDao bdao = new BoardDao();
 		
 		//변수선언
@@ -42,7 +43,6 @@ public class BInsertService implements Service {
 		    bdto = new BoardDto(btitle, bcontent, id, bfile);
 			//dao호출
 		    result = bdao.bInsert(bdto);
-		
 		} catch (Exception e) { e.printStackTrace();}
 
 	}
