@@ -14,11 +14,11 @@
 		   font-size: 16px; }
 		   table{width:800px; }
 		   th,td{height:40px; }
-		   td 8{vertical-align: middle;}
+		   td *{vertical-align: middle; }
 		   textarea {font-size:17px;}
 		   input[type=text]{width:97%; height:30px; font-size: 17px; }
 		   button{width:200px; height:60px; margin-top:30px; }
-		   img{width: 20%;}
+		   img { width:20%; }
 		</style>
 		<script>
 		    $(function(){
@@ -36,9 +36,9 @@
 	   <h1>글수정</h1>
 	   <form name="b_frm" method="post" action="doBUpdate.do" enctype="multipart/form-data">
 		   <table>
-		   <input type="hidden" name="bno" value="${bdto.bno}">
-		   <input type="hidden" name="id" value="${session_id}">
-		   <input type="hidden" name="oldfile" value="${bdto.bfile}">
+		     <input type="hidden" name="bno" value="${bdto.bno}">
+		     <input type="hidden" name="id" value="${session_id}">
+		     <input type="hidden" name="oldfile" value="${bdto.bfile}">
 		     <colgroup>
 		       <col width="20%">
 		       <col width="80%">
@@ -61,7 +61,7 @@
 		     </tr>
 		     <tr>
 		       <th>이미지</th>
-		       <td>${bdto.bfile} <img src = "upload/${bdto.bfile}"></td>
+		       <td>${bdto.bfile} <img src="upload/${bdto.bfile}"></td>
 		     </tr>
 		     
 		   </table>

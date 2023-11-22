@@ -34,7 +34,7 @@
 	   <h1>글쓰기</h1>
 	   <form name="b_frm" method="post" action="doBInsert.do" enctype="multipart/form-data">
 		   <table>
-		   <input type="hidden" name="id" value="${session_id}">
+		     <input type="hidden" name="id" value="${session_id}">
 		     <colgroup>
 		       <col width="20%">
 		       <col width="80%">

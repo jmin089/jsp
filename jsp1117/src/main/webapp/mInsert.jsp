@@ -14,9 +14,9 @@
 		   font-size: 16px; }
 		   th{width:200px; height:40px; }
 		   td{width:400px; }
-		   button{width:200px; height:60px; margin-top:30px;}
-		   td *{vertical-align: middle;}
-		   #idCheck{width:100px; height: 20px; margin-top:0;}
+		   button{width:200px; height:60px; margin-top:30px; }
+		   td * { vertical-align: middle; }
+		   #idCheck{ width:100px; height:20px; margin-top:0; }
 		</style>
 		<script>
 		   $(function(){
@@ -26,11 +26,30 @@
 					 $("#id").focus();
 					 return false;
 				 }
-				  
 				 alert("회원정보를 저장합니다.");  
 				 m_frm.submit();
-			  });
-		   });
+			  });//fbtn
+			  
+			  $("#idCheck").click(function(){
+				 alert($("#id").val()); 
+				 var chId = $("#id").val();
+				 $.ajax({
+					 url:'./IdCheck',
+					 type:'get',
+					 data:{"chId":chId},
+					 dataType:"json",
+					 success:function(data){
+						 console.log("data : "+data.result);
+						 //console.log("data.result : "+data[0].result);
+						 //console.log("data.result : "+result);
+						 alert("성공");
+					 },
+					 error:function(){
+						 alert("실패");
+					 }
+				 });//ajax
+			  });//click
+		   });//jquery
 		</script>
 	</head>
 	<body>
@@ -40,7 +59,10 @@
 		   <table>
 		     <tr>
 		       <th>아이디</th>
-		       <td><input type="text" name="id" id="id"></td>
+		       <td>
+		         <input type="text" name="id" id="id">
+		         <button type="button" id="idCheck">아이디 확인</button>
+		       </td>
 		     </tr>
 		     <tr>
 		       <th>패스워드</th>

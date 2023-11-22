@@ -35,8 +35,8 @@ public class FController extends HttpServlet {
 		case "/index.do":
 			response.sendRedirect("index.jsp");
 			break;
-		case "/memInsert.do":
-			response.sendRedirect("memInsert.jsp");
+		case "/mInsert.do":
+			response.sendRedirect("mInsert.jsp");
 			break;
 		case "/login.do":
 			response.sendRedirect("login.jsp");
@@ -52,43 +52,50 @@ public class FController extends HttpServlet {
 		case "/bList.do":  //1. 게시글 전체가져오기
 			service = new BListService();
 			service.execute(request, response);
-			System.out.println("FController : bList.jsp호출");//확인용
+			//확인용
+			System.out.println("FController : bList.jsp호출");
 			url = "bList.jsp";
 			break;
 		case "/bView.do":  //2. 게시글 1개 가져오기
 			service = new BSelectOneService();
 			service.execute(request, response);
-			System.out.println("FController : bView.jsp호출");//확인용
+			//확인용
+			System.out.println("FController : bView.jsp호출");
 			url = "bView.jsp";
 			break;
-		case "/bInsert.do":  //3. 게시글쓰기화면
+		case "/bInsert.do":  //3. 게시글 쓰기화면 
 			response.sendRedirect("bInsert.jsp");
 			break;
-		case "/doBInsert.do":  //3. 게시글쓰기 - insert
+		case "/doBInsert.do":  //3. 게시글 쓰기 - insert
 			service = new BInsertService();
 			service.execute(request, response);
-			System.out.println("FController : doBInsert.jsp호출");//확인용
+			//확인용
+			System.out.println("FController : bInsert.jsp호출");
 			url = "doBInsert.jsp";
 			break;
-		case "/bUpdate.do":  //4. 게시글수정화면 - select
+		case "/bUpdate.do":  //4. 게시글 수정화면 - select
 			service = new BSelectOneService();
 			service.execute(request, response);
-			System.out.println("FController : bUpdate.jsp호출");//확인용
+			//확인용
+			System.out.println("FController : bUpdate.jsp호출");
 			url = "bUpdate.jsp";
 			break;
-		case "/doBUpdate.do":  //4. 게시글수정 - Update
+		case "/doBUpdate.do":  //4. 게시글 수정 - update
 			service = new BUpdateService();
 			service.execute(request, response);
-			System.out.println("FController : doBUpdate.jsp호출");//확인용
+			//확인용
+			System.out.println("FController : doBUpdate.jsp호출");
 			url = "doBUpdate.jsp";
 			break;
-		case "/bDelete.do":  //5. 게시글삭제 - delete
+		case "/bDelete.do":  //5. 게시글 삭제 - delete
 			service = new BDeleteService();
 			service.execute(request, response);
-			System.out.println("bno : " +request.getParameter("bno"));
-			System.out.println("FController : bDelete.jsp호출");//확인용
+			//확인용
+			System.out.println("bno : "+request.getParameter("bno"));
+			System.out.println("FController : bDelete.jsp호출");
 			url = "bDelete.jsp";
 			break;
+		
 		
 		}//switch
 		
