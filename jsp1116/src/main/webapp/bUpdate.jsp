@@ -44,7 +44,7 @@
 			<form name="b_frm" method="post" action="doBUpdate.do" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="${session_id}">
 				<input type="hidden" name="bno" value="${bdto.bno}">
-				<input type="hidden" name="oldBfile" value="${bdto.bno}">
+				<input type="hidden" name="oldBfile" value="${bdto.bfile}">
 				<table>
 				<colgroup>
 					<col width="20%">
