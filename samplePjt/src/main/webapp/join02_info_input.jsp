@@ -1,121 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 	<head>
-		<c:if test="${param.f_agree != 'agree'}">
-			<script>
-			//alert()"${param.f_agree}"
-			alert("약관동의 없이 회원가입을 진행할수 없습니다.");
-			location.href="join01_terms.do";
-			</script>
-		</c:if>
+	    <c:if test="${param.f_agree != 'agree' && param.s_agree != 'agree' && param.t_agree != 'agree'  }">
+	      <script>
+	       alert("약관동의 없이 회원가입을 진행할 수 없습니다.");
+	       location.href="join01_terms.do";
+	      </script>
+	    </c:if>
 		<meta charset="UTF-8">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style_join02_info_input.css">
 		<title>회원가입 - 회원정보입력</title>
 		<style>
-			.txtOn{color: blue; font-weight: 900;}
-			.txtOff{color: red; font-weight: 900;}
+		  .txtOn{color:blue; font-weight: 900;}
+		  .txtOff{color:red; font-weight: 900;}
 		</style>
 		<script>
-			$(function(){
-				var idConfirm = 0;
-				$("#insertBtn").click(function(){
-					//alert($("#id").val())
-					
-					/* ? 비교하겠어요 .한개씩 뽑아와 *모든거를 [] 비교데이터 {3,}뒤에 숫자를 안넣으면 3자리 부터 무한대
-					var pw = $("#pw1").val();
-					var pwPtn = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&?]).{3,15}$/;	*/
-
-					/* 전화번호
-					var f_tell = $("#f_tell").val();
-					var m_tell = $("#m_tell").val();
-					var f_tell = /^[0-9]{2,3}$/;  //지역번호, 010
-					var m_tell = /^[0-9]{3,4}$/;  //중간번호	*/
-					
-					/* [a-z]{1} 첫글자는 소문자 a~z  {3,15}:4~16자리까지 첫글자 1자리 포함   첫글자+{3,15} = 4~16
-					var idPtn = /^[a-z]{1}[a-zA-Z0-9]{3,15}$/;	*/
-					
-					/* 이름 - 한글 1~3자리까지
-					var name = $("#name").val();
-					var namePtn = /^[가-힣]{1,3}$/;	*/
-					
-					//id - 영문 소대문자 숫자를 4~16자리까지
-					var id = $("#id").val();
-					var idPtn = /^[a-zA-Z0-9]{4,16}$/;
-					//시작은 /^ , 끝은 $/ , [a~z] 소문자 a부터 z까지 , {2~5} 2자리부터 5자리까지
-					//[a-z 0-9] - 띄어쓰기하면 띄어쓰기까지 적용됨.
-					//[]안에 영문 숫자 특수문자	*/	
-					
-					if(!idPtn.test(id)){
-						alert("영문 a~Z 숫자 0~9가 포함되어 총 4~16자리까지 입력가능합니다.");
-						return false;
-					}else{
-						alert("정상입력되었습니다.");
-					}
-					agreeFrm.submit();  //전송
-				})
+		  $(function(){
+			 var idConfirm = 0;
+			 
+			 $("#insertBtn").click(function(){
+				//alert($("#id").val());
+				var id = $("#id").val();
+				//var name = $("#name").val();
+				//var pw = $("#pw1").val();
+				//var f_tell = $("#f_tell").val();
+				//var m_tell = $("#m_tell").val();
+				var idPtn = /^[a-zA-Z0-9]{2,10}$/; // 영문자 4~16자리 사이 값을 비교 패턴
+				//var idPtn = /^[a-z]{1}[a-zA-Z0-9]{3,15}$/; // 첫글자는 영문소문자, 다음부터는 영문자,숫자가능 4~16 
+				//var namePtn = /^[가-힣]{1,3}$/; // 국문 1~3자리까지 가능
+				//var pwPtn = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{3,}$/; // 영문자,숫자,특수문자1개 이상
+				//var f_tellPtn = /^[0-9]{2,3}$/; // 유선전화가능 국번 02,043,010
+				//var m_tellPtn = /^[0-9]{3,4}$/; // 415,1111
+				if(!idPtn.test(id)){
+					alert("영문,숫자 2-10자리 이하로 입력하셔야 합니다.");
+					return false;
+				}else{
+					alert("정상입력되었습니다.");
+				}
+				//전송
+				agreeFrm.submit();
 				
-				//pw1,pw2 비교
-				$("#pw2").keyup(function(){
-					if($("#pw1").val()!=$("#pw2").val()){
-						$("#txtPw").text("비밀번호가 일치하지 않습니다.");
-						$("#txtPw").addClass("txtOff");
-						$("#txtPw").removeClass("txtOn");
-					}else{
-						$("#txtPw").text("비밀번호가 일치합니다.");
-						$("#txtPw").addClass("txtOn");
-						$("#txtPw").removeClass("txtOff");
-					}
-				})
+			 });
+			 
+			 //pw1,pw2 비교
+			 $("#pw2").keyup(function(){
+				 if($("#pw1").val()!=$("#pw2").val()){
+					 $("#txtPw").text("비밀번호가 일치하지 않습니다.");
+					 $("#txtPw").addClass("txtOff");
+					 $("#txtPw").removeClass("txtOn");
+				 }else{
+					 $("#txtPw").text("비밀번호가 일치합니다.");
+					 $("#txtPw").addClass("txtOn");
+					 $("#txtPw").removeClass("txtOff");
+				 }
+			 });
+			 
+			 
+			 //우편번호검색
+			 $("#postBtn").click(function(){
+				alert("daum 우편번호 검색창으로 이동"); 
+				new daum.Postcode({
+			        oncomplete: function(data) {
+			            $("#f_postal").val(data.zonecode);
+			            $("#address1").val(data.address);
+			        }
+			    }).open();
 				
-				//우편번호 검색
-				$("#postBtn").click(function(){
-					alert("다음 우편번호 창으로 이동")
-					new daum.Postcode({
-				        oncomplete: function(data) {
-				            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-				            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-				            $("#f_postal").val(data.zonecode)
-				            $("#address1").val(data.address)
-				        }
-				    }).open();
-				})
-				
-				//id 체크
-				$("#idChkBtn").click(function(){
-					alert("아이디 중복체크중")
-					var id = $("#id").val();
-					$.ajax({
-						url:"IdCheck",
-						type:"post",
-						data:{"id":id},
-						dataType:"text",   //text, json, xml, html
-						success:function(data){
-							//alert("성공")
-							//alert(data)
-							if(data=='사용 가능한 아이디 입니다.'){  //data->IdCheck의 result값
-								$("#txtIdChk").text(data);    //IdCheckService의 결과값을 가져옴?
-								$("#txtIdChk").addClass("txtOn")
-								$("#txtIdChk").removeClass("txtOff")
-								idConfirm = 1;
-							}else{
-								$("#txtIdChk").text(data);    //IdCheckService의 결과값을 가져옴?
-								$("#txtIdChk").addClass("txtOff")
-								$("#txtIdChk").removeClass("txtOn")
-								idConfirm = 0;
-							}
-							console.log("받은 결과값 : "+data)
-						},
-						error:function(){
-							alert("실패")
-						}
-					})//ajax
-				})//idChkBtn
-			})//function
+			 });
+			 
+			 //id체크
+			 $("#idChkBtn").click(function(){
+				 alert("아이디를 중복체크합니다.");
+				 var id = $("#id").val();
+				 $.ajax({
+					 url:"IdCheck",
+					 type:"post",
+					 data:{"id":id},
+					 dataType:"text", //text,json,xml,html
+					 success:function(data){ //data - 사용가능,사용불가능
+						 //alert(data);
+						 if(data=='사용가능'){
+							 $("#txtIdChk").text(data);
+							 $("#txtIdChk").addClass("txtOn");
+							 $("#txtIdChk").removeClass("txtOff");
+							 idConfirm = 1;
+						 }else{
+							 $("#txtIdChk").text(data);
+							 $("#txtIdChk").addClass("txtOff");
+							 $("#txtIdChk").removeClass("txtOn");
+							 idConfirm = 0;
+						 }
+						 console.log("받은 결과값 : "+data)
+					 },
+					 error:function(){
+						 alert("실패");
+					 }
+				 });
+			 }); 
+		  });
 		</script>
 	</head>
 	<body>
@@ -148,7 +135,6 @@
 				</ul>
 			</nav>
 		</header>
-		
 		<section>
 			<form name="agreeFrm" method="post" action="join03_success.do">
 				<div id="subBanner"></div>
@@ -234,17 +220,17 @@
 							<label for="mail_id">이메일</label>
 						</dt>
 						<script>
-							$(function(){
-								$("#chgMail").change(function(){
-									if($("#chgMail").val()==""){
-										$("#mail_tail").val("");
-										$("#mail_tail").prop("readonly",false);
-									}else{
-										$("#mail_tail").val($("#chgMail").val());
-										$("#mail_tail").prop("readonly",true);
-									}
-								})
-							});
+						    $(function(){
+						    	$("#chgMail").change(function(){
+						    		if($("#chgMail").val()==""){
+						    			$("#mail_tail").val("");
+						    			$("#mail_tail").prop("readonly",false);
+						    		}else{
+							    		$("#mail_tail").val($("#chgMail").val());
+							    		$("#mail_tail").prop("readonly",true);
+						    		}
+						    	});
+						    });
 						</script>
 						<dd>
 							<input type="text" id="mail_id" name="mail_id" required />
@@ -254,7 +240,7 @@
 								<option value="" selected>직접입력</option>
 								<option value="gmail.com">지메일</option>
 								<option value="naver.com">네이버</option>
-								<option value="daum.net">한메일</option>
+								<option value="daum.net">다음</option>
 								<option value="nate.com">네이트</option>
 							</select>
 						</dd>
@@ -300,8 +286,9 @@
 								<label for="female">여성</label>
 							</div>
 						</dd>
-				</fieldset>
-				<fieldset class="fieldset_class">
+					</dl>
+					
+					
 				</fieldset>
 				<h4>
 					선택 입력 정보 
@@ -335,8 +322,9 @@
 								</li>
 								<li>
 									<input type="checkbox" name="hobby" id="culture" value="culture" />
-									<label for="culture">문화/예술</label>
+									<label for="culture">문화예술</label>
 								</li>
+								
 							</ul>
 						</dd>
 					</dl>
@@ -348,6 +336,12 @@
 				
 			</form>
 		</section>
+		
+		
+		
+		
+		
+		
 		
 		<footer>
 			<div id="footer_wrap">
@@ -385,6 +379,8 @@
 					</div>
 				</div>
 			</div>
+		
+		
 		
 		</footer>
 	</body>

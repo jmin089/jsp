@@ -24,7 +24,6 @@ public class BoardDto {
 		this.id = id;
 		this.bfile = bfile;
 	}
-
 	public BoardDto(String btitle, String bcontent, String id, int bgroup, int bstep, int bindent, String bfile) {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
@@ -32,6 +31,13 @@ public class BoardDto {
 		this.bgroup = bgroup;
 		this.bstep = bstep;
 		this.bindent = bindent;
+		this.bfile = bfile;
+	}
+	public BoardDto(int bno, String btitle, String bcontent, String id, String bfile) {
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.id = id;
 		this.bfile = bfile;
 	}
 

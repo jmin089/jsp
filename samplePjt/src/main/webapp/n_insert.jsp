@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,32 +13,33 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/write.css">
   <script>
-  	$(function(){
-  		$(".write").click(function(){
-  			//alert("글쓰기를 진행합니다.")
-  			if($("#btitle").val()==""){
-  				alert("제목을 입력하세요.")
-  				$("#btitle").focus();
-  				return false;
-  			}
-  				insertFrm.submit();
-  		})
-  	})
+     $(function(){
+    	$(".write").click(function(){
+    		//alert("글쓰기를 진행합니다.");
+    		if($("#btitle").val()==""){
+    			alert("제목을 입력하세요.");
+    			$("#btitle").focus();
+    			return false;
+    		}
+    		
+    		insertFrm.submit();
+    	}); 
+     });
   </script>
 </head>
 
 <body>
   <header>
-     <ul>
-    <c:if test="${session_id==null}">
-      <li><a href="join01_terms.do">회원가입</a></li> <span>|</span>
-      <li><a href="login.do">로그인</a></li> <span>|</span>
-	</c:if>
-	<c:if test="${session_id!=null}">
-	  <li class="txtbold"><a href="m_info_input.do">${session_name}님</a></li><span>|</span>
-	  <li><a href="logout.do">로그아웃</a></li><span>|</span>
-	</c:if>
-      <li><a href="n_list.do">고객행복센터</a></li> <span>|</span>
+    <ul>
+      <c:if test="${session_id==null}">
+        <li><a href="join01_terms.do">회원가입</a></li><span>|</span>
+        <li><a href="login.do">로그인</a></li><span>|</span>
+      </c:if>
+      <c:if test="${session_id!=null}">
+		<li class="txtbold"><a href="m_info_input.do">${session_name}님</a></li><span>|</span>
+		<li><a href="logout.do">로그아웃</a></li><span>|</span>
+      </c:if>
+      <li><a href="n_list.do">고객행복센터</a></li><span>|</span>
       <li>배송지역검색</li> <span>|</span>
       <li>기프트카드 등록</li>
     </ul>
@@ -72,23 +73,13 @@
     <h1>관리자 글쓰기</h1>
     <hr>
 
-    <form action="doN_insert.do" name="insertFrm" method="post" enctype="multipart/form-data">
+    <form action="doN_insert.do" name="insertFrm" method="post" enctype="multipart/form-data"  >
       <table>
         <colgroup>
           <col width="15%">
           <col width="85%">
         </colgroup>
-        <tr>
-          <th>분류</th>
-          <td>
-            <div class="category-wrapper">
-              <select name="category" id="category">
-                <option value="notice">공지</option>
-                <option value="event">이벤트</option>
-              </select>  
-            </div>
-          </td>
-        </tr>
+        
         <tr>
           <th>제목</th>
           <td>

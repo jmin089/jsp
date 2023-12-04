@@ -4,12 +4,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>doN_insert.jsp</title>
+		<title>doN_update.jsp</title>
 	</head>
 	<body>
 	   <script>
-	     alert("게시글이 등록되었습니다.");
-	     location.href="n_list.do?page=${page}";
+	     alert("수정이 완료되었습니다.");
+	     location.href="n_list.do?page=${page}&category=${category}&sword=${sword}";
 	   </script>
 	
 	</body>

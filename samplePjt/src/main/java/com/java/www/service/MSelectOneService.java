@@ -11,12 +11,11 @@ public class MSelectOneService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		
 		HttpSession session = request.getSession();
 		//id 가져오기
 		String id = (String)session.getAttribute("session_id");
 		
-		//MemberDao 접근 - select
+		//dao접근 - select
 		MemberDao mdao = new MemberDao();
 		MemberDto mdto = mdao.selectOne(id);
 		

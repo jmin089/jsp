@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,19 +11,20 @@
 		<link rel="stylesheet" type="text/css" href="css/style_footer.css">
 		<title>회원가입 - 약관동의</title>
 		<script>
-			$(function(){
-				$("#memBtn").click(function(){
-					alert("다음으로 진행합니다.")
-					//alert("radio 개수 : "+$("input[type=radio]").length);  -전체개수 확인
-					//alert("radio 버튼 체크된 개수 : "+$("input[type=radio]:checked").length);  -체크된 개수 확인
-					//alert("agree 체크된 개수 : "+$(".agree:checked").length);
-					if($(".agree:checked").length<3){
-						alert("모두 동의하셔야 다음으로 진행가능합니다.")
-						return false;
-					}
-					agreeFrm.submit();
-				})
-			})
+		  $(function(){
+			 $("#memBtn").click(function(){
+				//alert("radio 개수 : "+$("input[type=radio]").length );
+				//alert("radio 체크개수 : "+$("input[type=radio]:checked").length );
+				//alert("agree 체크된 개수 : "+$(".agree:checked").length );
+				if($(".agree:checked").length<3){
+					alert("모두 동의하셔야 다음으로 진행가능합니다.");
+					return false;
+				}
+				
+				alert("다음으로 진행합니다.");
+				agreeFrm.submit();
+			 }); 
+		  });
 		</script>
 	</head>
 	<body>
@@ -62,7 +63,7 @@
 		
 		
 		<section>
-			<form name="agreeFrm" method="get" action="join02_info_input.do">
+			<form name="agreeFrm" method="post" action="join02_info_input.do">
 				<div id="subBanner"></div>
 				<div id="locationN">
 					<ul>

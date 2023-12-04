@@ -22,7 +22,7 @@
     			return false;
     		}
     		
-    		insertFrm.submit();
+    		updateFrm.submit();
     	}); 
      });
   </script>
@@ -70,16 +70,15 @@
   </nav>
 
   <section>
-    <h1>답글달기</h1>
+    <h1>게시글 수정</h1>
     <hr>
 
-    <form action="doN_reply.do" name="insertFrm" method="post" enctype="multipart/form-data"  >
+    <form action="doN_update.do" name="updateFrm" method="post" enctype="multipart/form-data"  >
       <input type="hidden" name="page" value="${page}">
+      <input type="hidden" name="bno" value="${bdto.bno}">
       <input type="hidden" name="category" value="${category}">
       <input type="hidden" name="sword" value="${sword}">
-      <input type="hidden" name="bgroup" value="${bdto.bgroup }">
-      <input type="hidden" name="bstep" value="${bdto.bstep }">
-      <input type="hidden" name="bindent" value="${bdto.bindent }">
+      <input type="hidden" name="oldfile" value="${bdto.bfile}">
       <table>
         <colgroup>
           <col width="15%">
@@ -88,17 +87,13 @@
         <tr>
           <th>제목</th>
           <td>
-            <input type="text" name="btitle" id="btitle" value="[답글] ${bdto.btitle}">
+            <input type="text" name="btitle" id="btitle" value="${bdto.btitle}">
           </td>
         </tr>
         <tr>
           <th>내용</th>
           <td>
-            <textarea name="bcontent" cols="50" rows="10">
-
------------------------
-${bdto.bcontent}
-            </textarea>
+            <textarea name="bcontent" cols="50" rows="10">${bdto.bcontent}</textarea>
           </td>
         </tr>
         <tr>
@@ -107,10 +102,16 @@ ${bdto.bcontent}
             <input type="file" name="bfile" id="file">
           </td>
         </tr>
+        <tr>
+          <th>이미지</th>
+          <td>
+            <img style="width:30%;" src="upload/${bdto.bfile}">
+          </td>
+        </tr>
       </table>
       <hr>
       <div class="button-wrapper">
-        <button type="button" class="write">작성완료</button>
+        <button type="button" class="write">수정</button>
         <button type="button" class="cancel">취소</button>
       </div>
     </form>

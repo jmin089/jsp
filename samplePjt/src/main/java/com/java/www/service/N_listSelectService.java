@@ -12,39 +12,49 @@ public class N_listSelectService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		
-		//객체선언
+		//dao접근 - select
 		BoardDao bdao = new BoardDao();
 		
+		//검색부분
+		String category = request.getParameter("category");
+		String sword = request.getParameter("sword");
+		System.out.println("service category : "+category);
+		System.out.println("service sword : "+sword);
 		
-		//-----------------------------------하단넘버링 시작----------------------------------------
-		/*하단넘버링에 필요한거
-		Page-현재페이지, listConut-게시글전체개수, maxPage-최대페이지, startPage-시작페이지, endPage-끝페이지,	*/
-		int rowPage = 10;      //1페이지 당 10개의 게시물
-		int bottomPage = 10;   //1,2,3,4,5,6,7,8,9,10
+		//------------- 하단 넘버링 필요내용 시작 --------------
+		// 현재페이지,게시글전체개수,최대페이지,시작페이지,끝페이지
+		int rowPage = 10;    //1페이지당 10개 게시글
+		int bottomPage = 10; //1,2,3,4,5,6,7,8,9,10
 		int page = 1;
-		if(request.getParameter("page")!=null)
-			page = Integer.parseInt(request.getParameter("page"));  //page가 없는데, 에러남 그래서 if로 null인지 물어봐야함.
-		System.out.println("service 현재 페이지이이이 : "+page);
-		int listConut = bdao.nListCount();
-		int maxPage = (int)Math.ceil((double)listConut/rowPage);
-		int startPage = (int)((page-1)/bottomPage)*bottomPage+1;   //10까지는 무조건 1 다음 10까지는 11 다음 10까지는 21
-		int endPage = startPage+bottomPage-1;   //10,20,30
-		if(endPage>maxPage) endPage = maxPage;  //
-		int startRow = (page-1) * rowPage + 1;     // 1,11,21,31,41
-		int endRow = startRow + rowPage - 1;  //10,20,30,40,50
-		//-----------------------------------하단넘버링 끝------------------------------------------
+		if(request.getParameter("page")!=null) 
+			page = Integer.parseInt(request.getParameter("page")); //page가 없는데, 에러
+		System.out.println("service 현재페이지 : "+page);    
+		//게시글 수 - category,sword
+		int listCount = bdao.nListCount(category,sword);
+		System.out.println("N_listSelectService listCount : "+listCount);
 		
-		//전체게시글 가져오기(BoardDao 접근)
-		ArrayList<BoardDto> list = bdao.n_listSelect(startRow, endRow);
+		int maxPage = (int) Math.ceil((double)listCount/rowPage); //1,1,1,1,1,1,1,1,1,1,11,11,11,11,11,11,11,11,....,21,21,21...
+		int startPage = (int)((page-1)/bottomPage)*bottomPage + 1; 
+		int endPage = startPage + bottomPage - 1; //10,20,30
+		if(endPage>maxPage) endPage = maxPage; //
+		int startRow = (page-1)*rowPage+1; //1,11,21,31,41
+		int endRow = startRow+rowPage-1;   //10,20,30,40,50
+		//------------- 하단 넘버링 필요내용 끝 --------------
+		
+		// 전체게시글,검색 가져오기
+		ArrayList<BoardDto> list = bdao.n_listSelect(category,sword,startRow,endRow);
+		
+		
 		
 		//request 추가
 		request.setAttribute("list", list);
 		request.setAttribute("page", page);
-		request.setAttribute("listConut", listConut);
+		request.setAttribute("listCount", listCount);
 		request.setAttribute("maxPage", maxPage);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("category", category);
+		request.setAttribute("sword", sword);
 
 	}
 

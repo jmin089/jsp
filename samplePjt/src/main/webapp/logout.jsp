@@ -4,13 +4,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>logout</title>
 	</head>
 	<body>
-		<%session.invalidate(); %>
-		<script>
-			alert("로그아웃이 되었습니다.")
-			location.href="main.do";
-		</script>
+	  <% session.invalidate(); %>
+	  <script>
+	    alert("로그아웃 되었습니다.");
+	    location.href="main.do";
+	  </script>
+	
 	</body>
 </html>
