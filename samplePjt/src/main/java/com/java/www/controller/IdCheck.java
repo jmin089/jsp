@@ -31,7 +31,7 @@ public class IdCheck extends HttpServlet {
 		//리턴 받는 값이 text일때
 		response.setCharacterEncoding("utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.print(result);     //아이디가 존재하지 않음
+		writer.print(result);     //아이디가 존재하지 않음(리턴값)
 		//writer.print("fail");   //아이디가 존재함
 		
 		/*리턴 받는 값이 html일때

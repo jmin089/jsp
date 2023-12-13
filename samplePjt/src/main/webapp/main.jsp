@@ -12,7 +12,7 @@
 		<script>
 		   $(function(){
 			  $(".modal").click(function(){
-				  alert("close");
+				  //alert("close");
 				  $(".modal").addClass("popOff");
 			  }); 
 		   });
